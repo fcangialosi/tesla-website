@@ -1,0 +1,39 @@
+doctype html
+html(lang='en')
+    head
+      meta(charset='utf-8')
+      meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=no')
+      title= title
+      link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/stylesheets/style.css')                
+      link(type='text/css', href='http://fonts.googleapis.com/css?family=Roboto+Slab|Roboto', rel='stylesheet')
+    body
+      nav.navbar.navbar-fixed-top(role='navigation')
+        div.navbar-header
+          a.navbar-brand.active.menuitem(href=""). TESLA
+        div.container.menuitem
+          ul.nav.navbar-nav
+            li.active
+              a(href="/"). Home
+            li
+              a(href="/members"). Team Members
+            li
+              a(href="/research"). Our Research
+            li
+              a(href="/docs"). Documents
+            li
+              a(href="/contact"). Contact Us
+      block content
+      script(src="http://code.jquery.com/jquery-1.11.0.min.js")
+      script(src="/scripts/typed.js")
+      script(type="text/javascript").
+        $(function(){
+          $(".title").typed({
+            strings: ["Team TESLA.\n\n\n", "Time-Reversed Energy Sourced Through Localized Antenna."],
+            typeSpeed: 45, // typing speed
+            backDelay: 1000, // pause before backspacing
+            loop: false, // loop on or off (true or false)
+            loopCount: false, // number of loops, false = infinite
+            callback: function(){ } // call function after typing is done
+          });
+        });

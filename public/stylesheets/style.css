@@ -1,0 +1,106 @@
+@font-face {
+  font-family: LeagueGoth;
+  font-style: normal;
+  src: url("/fonts/LeagueGothic-Regular.otf");
+}
+@font-face {
+  font-family: Aleo;
+  font-style: normal;
+  src: url("/fonts/Aleo-Regular.otf");
+}
+body {
+  padding: 50px;
+  background-image: url("/images/circuits.png");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+a {
+  color: #00b7ff;
+}
+h1 {
+  padding: 10px;
+  font-family: 'Roboto Slab', serif;
+  font-size: 5.75em;
+  color: #fff;
+  margin-top: 15px;
+  margin-left: 100px;
+  text-align: left;
+}
+.menuitem {
+  font-family: 'Aleo', serif;
+}
+.whitebox {
+  background-color: #fff;
+  opacity: 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+}
+.imgdropshadow {
+  padding: 5px;
+  border: solid 1px #efefef;
+}
+#typed-cursor {
+  opacity: 1;
+  font-weight: 100;
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  -ms-animation: blink 0.7s infinite;
+  -o-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite;
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@-ms-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
