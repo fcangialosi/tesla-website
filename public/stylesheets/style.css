@@ -8,9 +8,15 @@
   font-style: normal;
   src: url("/fonts/Aleo-Regular.otf");
 }
+@font-face {
+  font-family: 'pacificoregular';
+  src: url("/fonts/Pacifico.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   padding: 50px;
-  background-image: url("/images/circuits.png");
+  background-image: url("/images/blur2.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -21,86 +27,63 @@ a {
 }
 h1 {
   padding: 10px;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Aleo', serif;
   font-size: 5.75em;
   color: #fff;
   margin-top: 15px;
-  margin-left: 100px;
-  text-align: left;
+  text-align: center;
+}
+.teslalogo {
+  font-family: 'pacificoregular', sans-serif;
+  font-size: 2em;
+  margin-right: 20px;
 }
 .menuitem {
   font-family: 'Aleo', serif;
 }
-.whitebox {
-  background-color: #fff;
-  opacity: 1;
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 50%;
+.logobox {
+  margin-top: 35px;
 }
 .imgdropshadow {
   padding: 5px;
   border: solid 1px #efefef;
 }
-#typed-cursor {
-  opacity: 1;
-  font-weight: 100;
-  -webkit-animation: blink 0.7s infinite;
-  -moz-animation: blink 0.7s infinite;
-  -ms-animation: blink 0.7s infinite;
-  -o-animation: blink 0.7s infinite;
-  animation: blink 0.7s infinite;
+.circulargems {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  border-radius: 90px;
+  -webkit-border-radius: 90px;
+  -moz-border-radius: 90px;
+  background: url("/images/gems_circle.png") no-repeat;
+  background-size: 180px 180px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.8);
+  -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.8);
+  -moz-box-shadow: 0 0 8px rgba(0,0,0,0.8);
 }
-@-webkit-keyframes blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+.circularhonors {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  border-radius: 90px;
+  -webkit-border-radius: 90px;
+  -moz-border-radius: 90px;
+  background: url("/images/honors_sheild.png") no-repeat;
+  background-size: 180px 180px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.8);
+  -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.8);
+  -moz-box-shadow: 0 0 8px rgba(0,0,0,0.8);
 }
-@-moz-keyframes blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-@-ms-keyframes blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-@-o-keyframes blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+.circularumd {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  border-radius: 90px;
+  -webkit-border-radius: 90px;
+  -moz-border-radius: 90px;
+  background: url("/images/umd_circle.png") no-repeat;
+  background-size: 180px 180px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.8);
+  -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.8);
+  -moz-box-shadow: 0 0 8px rgba(0,0,0,0.8);
 }
