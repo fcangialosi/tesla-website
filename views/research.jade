@@ -1,5 +1,36 @@
 extends layout
 
 block content
-  h1= title
-  p Hello, World! Welcome to #{title}!
+  div.titlebox
+    h1= title
+  div.textbox(style="left: 0; right: 0; top: 200px; bottom: 0; position: absolute; overflow: scroll;")
+    div.container(style="margin-top:40px;")
+      div.row
+        div.col-md-10.col-md-offset-1
+          h2. Research Questions
+          ol
+            li With what electrical efficiency and over which distances can power be transferred wirelessly using the method of time reversal?
+              p(style="border-left: 8px solid #5a9ad5;").research-q-inner TESLA’s first hypothesis posits that significant amounts of power can be transmitted using TR. TESLA is defining a specific benchmark for this number to be at least one watt; it has already been proven that TR can transmit small packets of electricity in the form of data signals [3]. As such, it is believed that the same technique can be used for larger quantities of power because the amplitude of an electromagnetic wave does not impact factors such as frequency, wavelength, and dispersion. By leaving these factors untouched, TESLA believes that TR WPT can be scaled up using different circuitry setups. This conjecture is important to test, as the following hypotheses rely upon it.
+            li What impact does the environment have on these values?
+              p(style="border-left: 8px solid #5a9ad5;").research-q-inner The team’s second hypothesis proposes that TR methods will be on par with or more efficient – defined here as the ratio between the power received by the load and the power transmitted – than other WPT techniques. In traditional methods of WPT, signals are broadcasted in all directions, which results in significant energy losses. In a TR WPT system however, the energy will be focused on a single point. Although there will be some amount of loss due to absorption by the environment, it should be significantly less than the amount of loss from radiating power in all directions. Generally, TESLA believes that this method will optimize range and efficiency without compromising safety.
+            li How is this efficiency affected by the motion of the receiver?
+              p(style="border-left: 8px solid #5a9ad5;").research-q-inner TESLA hypothesizes that the efficiency of the TR-based WPT will not decrease significantly if the receiver is moving in an arbitrary fashion relative to the transmitter. It is logical that, since electromagnetic waves traverse at the speed of light, any distance traveled by the receiver during the process will be so miniscule that it can be ignored [5]. During statistical analysis of collected data, TESLA seeks to reject the null hypothesis that TR is only a viable method for transmitting data, not power, and that the transmission will break down if the receiver is in motion.
+          h2. Methods
+          p.research-methods-text The basis of TESLA’s transmission system will be a Time-Reversal Mirror (TRM), a system that focuses EM waves onto a receiver, transforming those waves into usable energy.  There will be three primary parts of TESLA’s TR system.  The TRM will be connected to an energy source, and will transmit the EM waves during the powering process.  The receiver will be a rectenna designed to reflect a unique EM wave pulse when an initial wave pulse strikes it. The behavior of the system is described in Figure 1.
+          p.research-methods-text The testing of the qualities and capabilities of this device is the main focus of TESLA’s research.  However, a significant amount of research time will be spent on the research, design, and construction of the TRM and receiver prototype.  TESLA has split its research into four major milestones to be completed over the course of the team’s research.  These milestones are the research, design and construction, testing, and analysis of the system.
+
+          h2. Simplified TRM Process
+          div.row(style="padding-top: 15px;")
+            div.col-md-6(style="border-right: 8px solid;")
+              div.research-methods-text(style="padding-right: 14px;") 
+                ol
+                  li The TRM sends an exploratory wave into the environment at an original frequency, f, (shown in light blue).
+                  li This wave reflects back from and echoes off surfaces in the environment. Reflections coming from the nonlinear element are at a distinctive frequency, k, where k is an integer (shown in red). The total echo recorded by the TRM (pictured in the small box) has these frequencies embedded in it.
+                  li As the echoes die away, the TRM takes a Fast Fourier Transform to isolate the relevant frequencies, reverses them, and increases their amplitude. This amplitude increase is how power is introduced into the system.
+                  li The TRM broadcasts the modified wave into the environment.
+                  li After reflecting off of surfaces throughout the environment, the modified wave collapses directly onto the nonlinear element
+            div.col-md-6
+              img(src="images/trm.jpg",width="552px",height="425px")
+
+
+           

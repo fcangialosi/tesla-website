@@ -1,5 +1,47 @@
 extends layout
 
 block content
-  h1= title
-  p Hello, World! Welcome to #{title}!
+  div.titlebox
+    h1. Documents
+  div.textbox(style="left: 0; right: 0; height: 100%; position: absolute;")
+    div.container(style="margin-top:40px;")
+      div.row
+        div.col-md-10.col-md-offset-1
+          table(id="files")
+            thead
+              tr
+                th Document
+                th Type
+                th Date
+            tbody
+              tr
+                td 
+                  a(href="files/tesla_thesis_proposal_spring_v2.docx"). Thesis Proposal
+                td Word Document
+                td February 22, 2014
+              tr
+                td 
+                  a(href="files/a.docx"). Thesis Proposal Presentation
+                td Powerpoint Presentation
+                td February 22, 2014
+              tr 
+                td 
+                  a(href="files/a.docx"). Current Budget
+                td Excel Spreadsheet
+                td February 22, 2014
+              tr
+                td
+                  a(href="files/a.docx"). DARPA Quad Chart
+                td Powerpoint Presentation
+                td February 25, 2014
+              tr
+                td
+                  a(href="files/a.docx"). Weekly Team Progress Report
+                td Powerpoint Presentation
+                td February 28, 2014
+              tr
+                td
+                  a(href="files/a.docx"). Weekly Team Progress Report
+                td Powerpoint Presentation
+                td March 7, 2014
+

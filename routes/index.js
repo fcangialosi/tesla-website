@@ -7,8 +7,8 @@ exports.index = function(req, res){
   res.render('index', { title: 'Team TESLA' });
 };
 
-exports.members = function(req, res){
-  res.render('members', {title:"Team Members"});
+exports.teams = function(req, res){
+  res.render('teams', {title:"Sub-Teams"});
 }
 
 exports.research = function(req, res){
@@ -16,9 +16,9 @@ exports.research = function(req, res){
 }
 
 exports.docs = function(req, res){
-  res.render('docs', {title:"Papers and Presentations"});
+  res.render('docs', {title:"Documents"});
 }
 
 exports.contact = function(req, res){
-  res.render('contact', {title:"Contact Us!"});
+  res.render('contact', {title:"Contact Us"});
 }

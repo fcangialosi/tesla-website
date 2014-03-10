@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  div.titlebox
+    h1= title
+  div.textbox(style="left: 0; right: 0; top: 200px; bottom: 0; position: absolute; overflow: scroll;")
+    div.container(style="margin-top:40px;")
+      div.row
+        div.col-md-9(role="main")
+          div(id="rectenna")
+            h2. Rectenna Team
+            div(style="border-left: 8px solid #5a9ad5;")
+              p.teaminfo. The purpose of the rectenna team is to optimize the rectenna, or receiving end of TESLA’s TR system, which converts the signal it receives into usable electrical energy. The first step in this process involves examining the nature of nonlinear response in common elements. The rectenna team has been measuring the amplitude of the second, third, and fourth harmonics (as well as the original frequency) output by frequency multipliers. By varying the input frequency and amplitude, the team can produce graphs of how these factors impact the amplitude of the harmonics from the component. Since TESLA's method of time reversal relies on a strong harmonic signal, knowledge of how best to produce one will be imperative. 
+              p.teaminfo. Second, the team is looking at pulse inversion as a possible replacement of Fourier transforms for processing the signal. Recall that in TESLA's original idea, the TRM would receive a signal and take the Fourier transform to isolate the nonlinear, harmonic portion before performing the TR and sending it back. With pulse inversion, a "fingerprint" of the receiver is recorded beforehand. First, the response of the receiver to the signal pulse and to an amplitude inversion of that pulse is recorded. Then those two recordings are added together. The linear portions of the signal will destructively interfere and cancel each other out, leaving only a nonlinear fingerprint. TESLA is interested in seeing if this new method is computationally faster than computing the Fourier transform, which could improve the quality of the reconstructed signal.
+          div(id="lossy")
+            h2. Lossy Events Team
+            div(style="border-left: 8px solid #ff3419;")
+              p.teaminfo. TESLA is interested in seeing how different elements of an environment affect the quality of a TR reconstruction. To this end, the team is recreating some of Dr. Anlage's original experiments with TR in an idealized experimental environment (a hollow, metal box optimized for TR testing), but varying the contents and nature of the environment in a controlled manner. The focus is on materials expected to be lossy, such as carpet, microwave absorber, or water. These and other materials are placed in the environment so the team can measure how their presence affects the experiment. Additionally, the team is looking at the impact of introducing perforations in the box, another possible source of signal loss.
+          div(id="modeling")
+            h2. Modeling Team
+            div(style="border-left: 8px solid #6fac46;")
+              p.teaminfo. Behind any good experiment is the "theoretical" data to test the experimental results against. It is the goal of this team to develop a solid theory of what TESLA should expect to see from the TR experiments. To accomplish this, the modeling team is making use of wave equation solvers such as HFSS (High Frequency Structural Simulator) to virtually model expected results of TR methods of WPT. This team aims to have a highly realistic model of wireless power transfer in place, which can both provide supplementary data to support experimental results and allow for collection of data that would otherwise be expensive or difficult to obtain in real-life experimentation.
+          div(id="antenna")
+            h2. Antenna Team
+            div(style="border-left: 8px solid #ffbf00;")
+              p.teaminfo.Similar to the goals of the rectenna team, the antenna team is focused on optimizing the provider side of the TR system, which will be sending the signal, and thus the energy to the target device. Since there are a wide range of different possible antenna geometries, which each have unique characteristics, the antenna team is currently building and testing different possible designs in order to determine which one will most efficiently and reliably transmit power within the context of TESLA's specific system. Once the design has been chosen, the antenna team will examine the effect of different frequencies on the amount of power transmitter by the antenna, again for the purpose of maximizing efficiency. Finally, the team will be investigating the application of impedance matching between the two antennas in order to minimize any unnecessary sources of energy loss.
+        div.col-md-3
+          div.bs-docs-sidebar.hidden-print.affix-top(role="complimentary",data-spy="affix")
+            ul.nav.bs-docs-sidenav
+              li.active
+                a(href="#rectenna"). Rectenna Team
+              li
+                a(href="#lossy"). Lossy Events Team
+              li
+                a(href="#modeling"). Modeling Team
+              li
+                a(href="#antenna"). Antenna Team
+
+    
