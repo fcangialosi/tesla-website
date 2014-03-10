@@ -22,11 +22,14 @@
 }
 body {
   padding: 50px;
-  background-image: url("/images/blur2.jpg");
+  background-image: url("/images/circuits.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+.roomy {
+  padding: 10px;
 }
 a {
   color: #00b7ff;
