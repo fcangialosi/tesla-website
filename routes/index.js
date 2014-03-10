@@ -11,6 +11,10 @@ exports.teams = function(req, res){
   res.render('teams', {title:"Sub-Teams"});
 }
 
+exports.people = function(req, res){
+	res.render('people', {title:"People"});
+}
+
 exports.research = function(req, res){
   res.render('research', {title:"Our Research"});
 }

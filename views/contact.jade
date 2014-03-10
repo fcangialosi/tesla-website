@@ -3,18 +3,23 @@ extends layout
 block content
   div.titlebox
     h1= title
-  div.textbox(style="left: 0; right: 0; height: 100%; position: absolute;")
+  div.textbox.contact-border(style="left: 0; right: 0; top: 200px; bottom: 0; position: absolute;")
     div.container(style="margin-top:40px;")
       h2(style="text-align: center;") Send us a message!
       div.row
         div.col-md-6.col-md-offset-3
-          div.input-group.input-group-lg.roomy
+          div.input-group.roomy
+            span.input-group-addon Name
             input.form-control(type="text",placeholder="Name")
-          div.input-group.input-group-lg.roomy
+          div.input-group.input-lg.roomy
             span.input-group-addon @
             input.form-control(type="text",placeholder="Your E-Mail Address")
-          div.input-group.input-group-lg.roomy
+          div.input-group.roomy
+            span.input-group-addon Subject
             input.form-control(type="text",placeholder="Subject")
-          div.input-group.input-group-lg.roomy
+          div.input-group.input-lg.roomy
+            span.input-group-addon Message
             input.form-control(type="text",placeholder="Message",width="300px")
+          div.roomy
+            button.btn.btn-lg.btn-block.btn-success(type="button") Send!
          
