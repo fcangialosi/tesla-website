@@ -1,8 +1,3 @@
-
-/*
- * GET home page.
- */
-
 exports.index = function(req, res){
   res.render('index', { title: 'Team TESLA' });
 };
@@ -25,4 +20,13 @@ exports.docs = function(req, res){
 
 exports.contact = function(req, res){
   res.render('contact', {title:"Contact Us"});
+}
+
+exports.loginform = function(req, res){
+  res.render('login', {title:"Login"});
+}
+
+exports.logout = function(req, res){
+  req.logout();
+  res.redirect('/login');
 }

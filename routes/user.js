@@ -1,8 +1,19 @@
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
-/*
- * GET users listing.
- */
+var userSchema = mongoose.Schema({
+	local			: {
+		email		: String,
+		password	: String,
+	}
+});
 
-exports.list = function(req, res){
-  res.send("respond with a resource");
-};
+userSchema.methods.generateHash = function(password) {
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
+
+userSchema.methods.validPassword = function(password) {
+	return bcrypt.compareSync(password, this.local.password);
+}
+
+module.exports = mongoose.model('User', userSchema);
