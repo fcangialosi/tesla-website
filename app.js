@@ -7,6 +7,7 @@ var path = require('path');
 var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 var mongoose = require("mongoose");
 var flash = require('connect-flash');
+var fs = require('fs');
 
 var app = express();
 
@@ -75,7 +76,12 @@ app.post('/user',isLoggedIn, function(req,res){
 });
 app.post('/checkin',isLoggedIn,checkInUpdate);
 app.get('/checkout',isLoggedIn,checkout);
-
+app.get('/future',isLoggedIn,function(req,res){
+  res.render('future',{user:req.user});
+});
+app.post('/future',isLoggedIn,function(req,res){
+  addTime(req,res);
+});
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
@@ -143,3 +149,40 @@ function checkout(req, res){
     });
   });
 }
+
+function addTime(req,res){
+  var start = req.body.start;
+  var end = req.body.end;
+  var using = req.body.using;
+  function pad(part,index,arr){
+    arr[index]=String("0" + arr[index]).slice(-2);
+  };
+  start.forEach(pad);
+  end.forEach(pad);
+  start_string = "20"+start[0]+"-"+start[1]+"-"+start[2]+" "+start[3]+":"+start[4]+":"+start[5];
+  end_string = "20"+end[0]+"-"+end[1]+"-"+end[2]+" "+end[3]+":"+end[4]+":"+end[5];
+  new_doc = {
+            title   : req.user.team_name+'\nReserved By:'+req.user.first_name+'\nUsing: '+using,
+            start   : start_string,
+            end     : end_string,
+            color   : getTeamColor(req.user.team_name),
+            allDay  : false
+  };
+  fs.lstat('./public/data/calendar.json',function(err,stats){
+    buf = new Buffer(","+JSON.stringify(new_doc)+"]");
+    cal = fs.openSync('./public/data/calendar.json','r+',function(err,fd){});
+    bytes = fs.writeSync(cal,buf,0,buf.length,stats.size-1);
+  });
+}
+
+function getTeamColor(team){
+  if(team=="Rectenna Team"){
+    return '#5a9ad5';
+  } else if(team=="Modeling Team"){
+    return '#6fac46';
+  } else if(team=="Antenna Team"){
+    return '#ffbf00';
+  } else {
+    return '#ff3419';
+  }
+}  

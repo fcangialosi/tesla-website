@@ -1,0 +1,76 @@
+doctype html
+html(lang='en')
+    head
+      meta(charset='utf-8')
+      meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=no')
+      title= title
+      link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css')
+      link(type='text/css', href='http://fonts.googleapis.com/css?family=Roboto+Slab|Roboto', rel='stylesheet')
+      link(rel="stylesheet", href="/scripts/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css")
+    body
+      div.container-fluid
+        div.row
+          div.col-md-1.col-md-offset-1(style="padding-top:20px;")
+            a.btn.btn-primary(style="text-transform: uppercase; letter-space: 1px;", href="/lab")= user.local.email
+          div.col-md-6.col-md-offset-1
+            h1(style="font-family: 'Roboto Slab'; text-align: center;") Request Lab Time 
+          div.col-md-1.col-md-offset-1(style="padding-top:20px;")
+            a.btn.btn-danger(style="text-transform: uppercase; letter-space: 1px;", href="/logout"). logout
+        div.row(style="padding-top: 30px;")
+          div.col-sm-3.col.col-sm-offset-3
+            div.form-group
+              div.input-group.date(id="startpicker")
+                span.input-group-addon Start
+                input.form-control(type="text")
+                span.input-group-addon
+                  span.glyphicon.glyphicon-calendar
+          div.col-sm-3
+            div.form-group
+              div.input-group.date(id="endpicker")
+                span.input-group-addon End
+                input.form-control(type="text")
+                span.input-group-addon
+                  span.glyphicon.glyphicon-calendar
+        div.row
+          div.col-sm-6.col-sm-offset-3
+            div.input-group
+              span.input-group-addon Using
+              input.form-control(type="text",placeholder="What equipment will you be using?",id="equipment")
+        div.row
+          div.col-sm-6.col-sm-offset-3
+            div.roomy(style="padding: 5px;")
+              button.btn.btn-lg.btn-block.btn-success(id="request") Request
+        div.row
+          div.col-sm-12
+            div(id="calendar")
+
+    script(src="http://code.jquery.com/jquery-1.11.0.min.js")
+    script(src="/bootstrap/js/bootstrap.min.js")
+    script(src="/scripts/moment/min/moment.min.js")
+    script(src="/scripts/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")
+    link(rel='stylesheet', type='text/css', href='/stylesheets/fullcalendar.css')
+    script(type='text/javascript',src='/scripts/fullcalendar.min.js')
+    script(type="text/javascript").
+      $(function (){
+        $('#startpicker').datetimepicker({
+        });
+        $('#endpicker').datetimepicker({
+        });
+        $('#request').click(function(){
+          var start_time = $('#startpicker').data("DateTimePicker").getDate()._a;
+          var end_time = $('#endpicker').data("DateTimePicker").getDate()._a;
+          var equipment = $('#equipment').val();
+          if(!start_time || !end_time){
+            alert("Make sure to select both a start and end time.");
+          } else {
+            $.post("/future",{start:start_time,end:end_time,using:equipment},function(data){
+            });
+            $('#calendar').fullCalendar('refetchEvents');
+            console.log($('#calendar').fullCalendar('clientEvents'));
+          }
+        });
+        $('#calendar').fullCalendar({
+          defaultView: 'agendaWeek',
+          events: '/data/calendar.json'
+        });
+      });

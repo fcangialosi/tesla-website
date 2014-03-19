@@ -122,6 +122,9 @@ h3 {
   font-family: 'Roboto Slab', serif;
   font-size: 1.5em;
 }
+.empty {
+  background-color: #7f8c8d;
+}
 .circulargems {
   width: 180px;
   height: 180px;
