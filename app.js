@@ -74,6 +74,9 @@ app.post('/user',isLoggedIn, function(req,res){
   req.logout();
   res.redirect('/login')
 });
+app.post('/incr',function(req,res){
+  incrementUnreadCount(req);
+});
 app.post('/checkin',isLoggedIn,checkInUpdate);
 app.get('/checkout',isLoggedIn,checkout);
 app.get('/future',isLoggedIn,function(req,res){
@@ -173,6 +176,14 @@ function addTime(req,res){
     cal = fs.openSync('./public/data/calendar.json','r+',function(err,fd){});
     bytes = fs.writeSync(cal,buf,0,buf.length,stats.size-1);
   });
+}
+
+function incrementUnreadCount(){
+  var which = req.body.forum_name;
+  var secret = req.body.secret;
+  if(which==""){
+    
+  }
 }
 
 function getTeamColor(team){
