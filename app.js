@@ -1,15 +1,18 @@
 var express = require('express');
 var User = require('./routes/user');
+var Counter = require('./routes/counter');
 var Status = require('./routes/status');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var url = require('url');
 var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 var mongoose = require("mongoose");
 var flash = require('connect-flash');
 var fs = require('fs');
 
 var app = express();
+var secret = '42xigUBluzIGgGl8zOSA'
 
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
@@ -74,9 +77,6 @@ app.post('/user',isLoggedIn, function(req,res){
   req.logout();
   res.redirect('/login')
 });
-app.post('/incr',function(req,res){
-  incrementUnreadCount(req);
-});
 app.post('/checkin',isLoggedIn,checkInUpdate);
 app.get('/checkout',isLoggedIn,checkout);
 app.get('/future',isLoggedIn,function(req,res){
@@ -85,9 +85,41 @@ app.get('/future',isLoggedIn,function(req,res){
 app.post('/future',isLoggedIn,function(req,res){
   addTime(req,res);
 });
+app.post('/newpost',function(req,res){
+  incrementUnreadCount(url.parse(req.url,true).query);
+});
+app.get('/clear',isLoggedIn, function(req,res){
+  clearUnread(url.parse(req.url,true).query);
+  res.render('index');
+});
+app.get('/posts',function(req,res){
+  Counter.findOne({'record':'teams'},function (err, doc) {
+    res.json(doc);
+  });
+});
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+var teams = {
+  "general" : "60",
+  "modeling" : "66",
+  "lossy" : "69",
+  "antenna" : "68",
+  "rectenna" : "65",
+  "ip" : "67",
+  "grant" : "70"
+}
+
+var num_to_name = {
+  "60" : "general",
+  "66" : "modeling",
+  "69" : "lossy",
+  "68" : "antenna",
+  "65" : "rectenna",
+  "67" : "ip",
+  "70" : "grant"
+}
 
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
@@ -178,11 +210,43 @@ function addTime(req,res){
   });
 }
 
-function incrementUnreadCount(){
-  var which = req.body.forum_name;
-  var secret = req.body.secret;
-  if(which==""){
-    
+function incrementUnreadCount(query){
+  console.log(query);
+  var forum_num = query.forum_num.toString();
+  var topic_num = query.topic_num.toString();
+  var client_secret = query.secret;
+  if(client_secret == secret){
+    console.log("secret is right");
+    var team_name = num_to_name[forum_num];
+    Counter.findOne({'record':'teams'},function (err, doc) {
+      console.log("connected to db");
+      if(topic_num in doc[team_num]){
+        doc[team_name][topic_num] += 1;
+      } else {
+        doc[team_name][topic_num] = 1;
+      }
+      doc.save();
+      console.log("SAVED!");
+    });
+  }
+}
+
+function clearUnread(query){
+  console.log("clear?");
+  var client_secret = query.secret;
+  if(client_secret == secret){
+    console.log("secret is righ");
+    Counter.findOne({'record':'teams'},function (err,doc) {
+      console.log("connected to db");
+      doc['grant'] = undefined;
+      doc['ip'] = undefined;
+      doc['antenna'] = undefined;
+      doc['rectenna'] = undefined;
+      doc['modeling'] = undefined;
+      doc['lossy'] = undefined;
+      doc['general'] = undefined;
+      doc.save();
+    });
   }
 }
 

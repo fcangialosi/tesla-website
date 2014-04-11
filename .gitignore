@@ -1,2 +1,4 @@
 node_modules/
 public/scripts/DataTables-1.9.4/
+public/scripts/moment/
+public/scripts/eonasdan-bootstrap-datetimepicker/
