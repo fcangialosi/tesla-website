@@ -86,7 +86,8 @@ app.post('/future',isLoggedIn,function(req,res){
   addTime(req,res);
 });
 app.post('/newpost',function(req,res){
-  incrementUnreadCount(url.parse(req.url,true).query);
+  incrementUnreadCount(req.query);
+  return res.send("ok");
 });
 app.get('/clear',isLoggedIn, function(req,res){
   clearUnread(url.parse(req.url,true).query);
@@ -111,14 +112,24 @@ var teams = {
   "grant" : "70"
 }
 
-var num_to_name = {
-  "60" : "general",
-  "66" : "modeling",
-  "69" : "lossy",
-  "68" : "antenna",
-  "65" : "rectenna",
-  "67" : "ip",
-  "70" : "grant"
+var num_to_topic = {
+  "60" : "generalTopic",
+  "66" : "modelingTopic",
+  "69" : "lossyTopic",
+  "68" : "antennaTopic",
+  "65" : "rectennaTopic",
+  "67" : "ipTopic",
+  "70" : "grantTopic"
+}
+
+var num_to_count = {
+  "60" : "generalCount",
+  "66" : "modelingCount",
+  "69" : "lossyCount",
+  "68" : "antennaCount",
+  "65" : "rectennaCount",
+  "67" : "ipCount",
+  "70" : "grantCount"
 }
 
 function isLoggedIn(req, res, next){
@@ -211,40 +222,58 @@ function addTime(req,res){
 }
 
 function incrementUnreadCount(query){
-  console.log(query);
   var forum_num = query.forum_num.toString();
   var topic_num = query.topic_num.toString();
   var client_secret = query.secret;
   if(client_secret == secret){
-    console.log("secret is right");
-    var team_name = num_to_name[forum_num];
-    Counter.findOne({'record':'teams'},function (err, doc) {
-      console.log("connected to db");
-      if(topic_num in doc[team_num]){
-        doc[team_name][topic_num] += 1;
+     Counter.findOne({'record':'teams'},function (err, doc) {
+      var topicName = num_to_topic[forum_num].toString();
+      var countName = num_to_count[forum_num].toString();
+      var teamTopicArr = doc[topicName].toObject(),
+          teamCountArr = doc[countName].toObject();
+      var loc = teamTopicArr.indexOf(topic_num);
+      if(loc === -1){
+        teamTopicArr = teamTopicArr.concat(topic_num);
+        teamCountArr = teamCountArr.concat(1);
       } else {
-        doc[team_name][topic_num] = 1;
+        teamCountArr[loc] += 1;
       }
-      doc.save();
-      console.log("SAVED!");
+      if(topicName == "generalTopic")
+        Counter.update({'record' : 'teams'}, {"generalTopic" : teamTopicArr, "generalCount" : teamCountArr}, {multi : true}, function(err,numAffected){});
+      else if(topicName == "modelingTopic")
+        Counter.update({'record' : 'teams'}, {"modelingTopic" : teamTopicArr, "modelingCount" : teamCountArr}, {multi : true}, function(err,numAffected){});
+      else if(topicName == "lossyTopic")
+        Counter.update({'record' : 'teams'}, {"lossyTopic" : teamTopicArr, "lossyCount" : teamCountArr}, {multi : true}, function(err,numAffected){});
+      else if(topicName == "ipTopic")
+        Counter.update({'record' : 'teams'}, {"ipTopic" : teamTopicArr, "ipCount" : teamCountArr}, {multi : true}, function(err,numAffected){});
+      else if(topicName == "grantTopic")
+        Counter.update({'record' : 'teams'}, {"grantTopic" : teamTopicArr, "grantCount" : teamCountArr}, {multi : true}, function(err,numAffected){});
+      else if(topicName == "rectennaTopic")
+        Counter.update({'record' : 'teams'}, {"rectennaTopic" : teamTopicArr, "rectennaCount" : teamCountArr}, {multi : true}, function(err,numAffected){});
+      else if(topicName == "antennaTopic")
+        Counter.update({'record' : 'teams'}, {"antennaTopic" : teamTopicArr, "antennaCount" : teamCountArr}, {multi : true}, function(err,numAffected){});
     });
   }
 }
 
 function clearUnread(query){
-  console.log("clear?");
   var client_secret = query.secret;
   if(client_secret == secret){
-    console.log("secret is righ");
     Counter.findOne({'record':'teams'},function (err,doc) {
-      console.log("connected to db");
-      doc['grant'] = undefined;
-      doc['ip'] = undefined;
-      doc['antenna'] = undefined;
-      doc['rectenna'] = undefined;
-      doc['modeling'] = undefined;
-      doc['lossy'] = undefined;
-      doc['general'] = undefined;
+      doc['grantTopic'] = [];
+      doc['ipTopic'] = [];
+      doc['antennaTopic'] = [];
+      doc['rectennaTopic'] = [];
+      doc['modelingTopic'] = [];
+      doc['lossyTopic'] = [];
+      doc['generalTopic'] = [];
+      doc['grantCount'] = [];
+      doc['ipCount'] = [];
+      doc['antennaCount'] = [];
+      doc['rectennaCount'] = [];
+      doc['modelingCount'] = [];
+      doc['lossyCount'] = [];
+      doc['generalCount'] = [];
       doc.save();
     });
   }

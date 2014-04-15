@@ -1,27 +1,18 @@
 var mongoose = require('mongoose');
 
 var counterSchema = mongoose.Schema({
-    general    : {
-    	String : Number
-    },	
-    rectenna   : {
-    	String : Number
-    },
-    antenna      : {
-    	String : Number
-    },
-    lossy   : {
-    	String : Number
-    },
-    gigabox   : {
-    	String : Number
-    },
-    ip : {
-    	String : Number
-    },
-    grant : {
-    	String : Number
-    }
+    generalTopic	: [String],
+    generalCount 	: [Number],
+    rectennaTopic 	: [String],
+    rectennaCount	: [Number],
+    antennaTopic    : [String], 
+    antennaCount	: [Number],
+    lossyTopic   	: [String],
+    lossyCount		: [Number],
+    ipTopic			: [String],
+    ipCount			: [Number],
+    grantTopic 		: [String],
+    grantCount 		: [Number]
 });
 
 module.exports = mongoose.model('Counter', counterSchema);
